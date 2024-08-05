@@ -1,7 +1,6 @@
 import express, { Request, Response } from "express"
 import axios from "axios"
 import { sendMail } from "./mailer"
-import fs from "fs"
 import path from "path"
 import cors from "cors"
 
@@ -24,17 +23,7 @@ app.get("/launch", async (req: Request, res: Response) => {
 
   axios.get(`${ec2BackendUrl}/launch`, {params: {id: req.query.id}});
   const passwordHash = (await axios.get(`http://${backendIp}/Myrtille/GetHash.aspx`, { params: { password: rdpInfo.password } })).data;
-  await axios.get(`http://${backendIp}/Myrtille`, {
-    params: {
-      __EVENTTARGET: "",
-      __EVENTARGUMENT: "",
-      server: rdpInfo.server,
-      user: rdpInfo.user,
-      passwordHash
-    }
-  });
-
-  res.redirect(encodeURI(`http://localhost/Myrtille/?__EVENTTARGET=&__EVENTARGUMENT=&server=${rdpInfo.server}&user=${rdpInfo.user}&passwordHash=${passwordHash}&connect=Connect`))
+  res.redirect(encodeURI(`http://${backendIp}/Myrtille/?__EVENTTARGET=&__EVENTARGUMENT=&server=${rdpInfo.server}&user=${rdpInfo.user}&passwordHash=${passwordHash}&connect=Connect`))
 });
 
 
