@@ -29,7 +29,7 @@ app.get("/launch", async (req: Request, res: Response) => {
 
 app.get("/invite", async (req: Request, res: Response) => {
   const { email } = req.query;
-  sendMail(email as string, "Invitation to study", "Hi, please participate in the study here http://localhost/launch?id=ondriah");
+  sendMail(email as string, "Invitation to study", `Hi, please participate in the study here http://${backendIp}/launch?id=ondriah`);
 
 });
 
