@@ -14,6 +14,7 @@ const rdpInfo = {
 const app = express();
 
 const ec2BackendUrl = process.env.EC2_BACKEND_URL;
+const backendIp = process.env.BACKEND_IP;
 
 const staticDir = path.join(__dirname, "../static");
 app.use(cors());
@@ -22,8 +23,8 @@ app.use(express.static(staticDir));
 app.get("/launch", async (req: Request, res: Response) => {
 
   axios.get(`${ec2BackendUrl}/launch`, {params: {id: req.query.id}});
-  const passwordHash = (await axios.get("http://localhost/Myrtille/GetHash.aspx", { params: { password: rdpInfo.password } })).data;
-  await axios.get("http://localhost/Myrtille", {
+  const passwordHash = (await axios.get(`http://${backendIp}/Myrtille/GetHash.aspx`, { params: { password: rdpInfo.password } })).data;
+  await axios.get(`http://${backendIp}/Myrtille`, {
     params: {
       __EVENTTARGET: "",
       __EVENTARGUMENT: "",
