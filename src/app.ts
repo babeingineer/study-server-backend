@@ -34,7 +34,7 @@ app.get("/invite", async (req: Request, res: Response) => {
 });
 
 app.get("/logs", async (req: Request, res: Response) => {
-  res.send((await axios.get(`${ec2BackendUrl}/logs`)).data);
+  res.send((await axios.get(`${ec2BackendUrl}/logs`, {params: {id: req.query.id}})).data);
 })
 
 app.listen(8001, () => {
