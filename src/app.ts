@@ -6,7 +6,7 @@ import path from "path"
 import cors from "cors"
 
 const rdpInfo = {
-  "server": "107.23.191.127",
+  "server": "34.224.109.221",
   "user": "administrator",
   "password": "mO29pXzn%B2Kf(hwoBM$vOXbpDQ3hoWw"
 }
